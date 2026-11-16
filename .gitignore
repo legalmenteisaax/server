@@ -1,0 +1,10 @@
+# Todo queda fuera de Git (mundo, .jar, registros, claves y listas de jugadores),
+# salvo lo que se nombra abajo con «!».
+*
+!.gitignore
+!CLAUDE.md
+!README.md
+!docs/
+!docs/**
+!scripts/
+!scripts/**
