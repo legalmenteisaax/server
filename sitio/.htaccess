@@ -1,0 +1,20 @@
+# Reglas del servidor web para syntaaxmc.isaacyepez.com.
+# (Hostinger ya redirige de http a https; repetirlo aquí puede crear un bucle.)
+Options -Indexes
+AddDefaultCharset utf-8
+AddType font/woff2 .woff2
+
+<IfModule mod_headers.c>
+  # Solo se ejecuta código de este sitio y nadie puede meter la página en un marco.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  <FilesMatch "\.(html|js|css)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(woff2|png|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
