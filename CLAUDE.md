@@ -37,7 +37,10 @@ El `.gitignore` deja fuera todo menos lo que nombra: el mundo, la conexión de D
 4. Geyser y Floodgate. Probar en la casa, desde el PC y el celular.
 5. playit.gg. Probar desde datos móviles.
 6. Iniciar con doble clic y copia automática del mundo.
+7. Panel de SyntaaxMC (pedido el 19 nov 2026): bandeja con ícono propio en el PC, página pública con el botón «Agregar a Minecraft» y `/admin/` con estado, gráficas, plugins y configuración. Plan en `docs/plan/panel.md`.
 
 ## Estructura
 - `docs/bitacora.md` → qué se hizo en cada sesión, errores con su causa y solución, y qué falta.
-- `scripts/` → lo que se haga para iniciar el servidor y sacar copias (por hacer).
+- `docs/plan/panel.md` → el plan del panel (bandeja, plugin SyntaaxPanel y sitio en Hostinger).
+- `scripts/` → lo que se haga para iniciar el servidor y sacar copias.
+- `recursos/iconos/` → íconos de la bandeja con la identidad de ¡saax: `servidor` (Java) y `tunel` (playit), cada uno en `.svg`, `.png` y `.ico`, con variantes `-ok` (punto verde) y `-error` (punto rojo).

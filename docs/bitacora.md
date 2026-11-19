@@ -13,3 +13,11 @@
 - El `level.dat` del End dice Paper con Minecraft 1.21.11.
 - Error: la copia de los plugins (245 MB) no bajó a la nube. Causa: la conexión con Drive solo baja archivos de hasta 10 MB. Solución: se abren en el PC.
 - Falta: armar el servidor en el PC con esas copias.
+
+## 19 nov 2026 · Panel de SyntaaxMC (nube)
+- La sesión del PC («Recuperación del servidor (PC)») ya montó el servidor: Java entra con `syntaaxmc.isaacyepez.com` y el celular con `molecule-hardship.tun.ply.gg`, puerto 19132. Isaac entró desde el celular. Ese trabajo todavía no está en este repositorio.
+- En la foto del celular: el marcador aún dice `syntaax.tarohosting.com`, FancyNpcs avisa que hay versión nueva (2.11.0 → 2.12.1) y en el celular Isaac sale con rango «default» porque Floodgate lo trata como otro jugador (`.Isaac075095`).
+- Isaac pidió: bandeja con íconos propios para Java y playit, página con botón para agregar el servidor, subpágina de administrador con plugins, configuración, métricas y gráficas, identidad de isaacyepez.com, plugins al día y quitar DriveBackupV2. Plan en `docs/plan/panel.md`.
+- Se revisó el dominio: el SRV de Java apunta a `molecule-darkness.tun.ply.gg:44997`, así que el nombre puede pasar a Hostinger sin cortar a Java.
+- Se hicieron los íconos (`recursos/iconos/`).
+- Falta: fase P1 en el PC y P2 a P4 en la nube.
