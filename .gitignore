@@ -12,3 +12,6 @@
 !recursos/**
 !sitio/
 !sitio/**
+# Archivos que los scripts cambian solos al correr
+scripts/*.state
+scripts/*.flag
