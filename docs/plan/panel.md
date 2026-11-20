@@ -43,5 +43,5 @@ Revisado el 19 nov 2026: `syntaaxmc.isaacyepez.com` es un CNAME a `molecule-limi
 ## Fases
 - **P1 (PC):** íconos, bandeja y consola; plugins al día; DriveBackupV2 fuera. Hecha el 19 nov 2026 (ver la bitácora). Para apagar o reiniciar, el plugin puede usar `scripts/apagado.flag`: mientras exista, ni la bandeja ni el watchdog prenden el servidor.
 - **P2 (nube):** página pública con el botón. Hecha el 20 nov 2026: https://syntaaxmc.isaacyepez.com.
-- **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 26.2 en la nube (Java 25).
+- **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 26.2 en la nube (Java 25). Primera parte hecha el 20 nov 2026: entrada con Face ID, estado, gráfica de jugadores (muestras cada 5 minutos desde Hostinger) y dispositivos. Falta el plugin SyntaaxPanel.
 - **P4:** consola, plugins y editor de configuración en `/admin/`.
