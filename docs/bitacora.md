@@ -32,7 +32,7 @@
 - Prueba sin ventanas: `scripts/prueba-bandeja.ps1` (pings, RCON, íconos y sintaxis).
 - **Plugins**: 11 actualizados y DriveBackupV2 fuera (detalle en `docs/plugins.md`). Reinicio de 18:59 a 19:01, 125 s caído; arrancó sin errores nuevos.
 - **Dirección**: TAB (animación `web`, que va en el marcador y la lista, y la barra de jefe) y DiscordSRV (estado y `,ip`) dicen `syntaaxmc.isaacyepez.com`. `,ip` da para Bedrock `molecule-hardship.tun.ply.gg`, puerto 19132.
-- **Rango del celular**: `.Isaac075095` quedó en `propietario`. Tiene además un prefijo propio «Bedrock» con el mismo peso (1000) que el de «Propietario».
+- **Rango del celular**: `.Isaac075095` quedó en `propietario`. Se le quitó el prefijo propio «Bedrock» (pesaba lo mismo que «Propietario» y lo tapaba), a pedido de Isaac.
 - Error: la copia de los plugins salió con 324 archivos menos. Causa: un archivo bloqueado (la base de LuckPerms) dejaba abierta una entrada del zip y fallaban todos los siguientes. Solución: leer cada archivo a memoria antes de crear la entrada; la base de LuckPerms se copia con `lp export`.
 - Error: LuckPerms no encuentra `.Isaac075095` por nombre (el punto no es válido). Solución: usar el UUID `00000000-0000-0000-0009-01f659d197bf`.
 - Error: el servidor y playit se cerraron a las 17:37 y a las 18:04, seguramente al cerrar sus ventanas; el watchdog los prendió. Ahora corren sin ventana.
