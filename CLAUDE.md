@@ -42,5 +42,6 @@ El `.gitignore` deja fuera todo menos lo que nombra: el mundo, la conexión de D
 ## Estructura
 - `docs/bitacora.md` → qué se hizo en cada sesión, errores con su causa y solución, y qué falta.
 - `docs/plan/panel.md` → el plan del panel (bandeja, plugin SyntaaxPanel y sitio en Hostinger).
-- `scripts/` → lo que se haga para iniciar el servidor y sacar copias.
+- `scripts/` → lo que se haga para iniciar el servidor y sacar copias. `scripts/subir-sitio.mjs` sube `sitio/` a Hostinger (necesita SUBIR_URL, SUBIR_AUTH y SUBIR_REST de `hosting_files_generate-upload-url`, usuario u810585570, dominio isaacyepez.com; duran unas 6 horas).
+- `sitio/` → la página pública https://syntaaxmc.isaacyepez.com (carpeta `public_html/syntaaxmc`), con la identidad de ¡saax: botón «Agregar a Minecraft» para el celular, dirección de Java para copiar y `estado.php` (en línea y cuántos jugadores, sin nombres). `estado.php` saluda al servidor con el nombre y el puerto del túnel que da el SRV, como lo hace Java: playit corta la conexión si recibe otro nombre.
 - `recursos/iconos/` → íconos de la bandeja con la identidad de ¡saax: `servidor` (Java) y `tunel` (playit), cada uno en `.svg`, `.png` y `.ico`, con variantes `-ok` (punto verde) y `-error` (punto rojo).

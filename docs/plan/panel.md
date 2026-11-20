@@ -38,10 +38,10 @@ Tres piezas. El PC nunca queda abierto a internet: solo hace salidas HTTPS a Hos
 - Los comandos delicados (`op`, `deop`, `stop`, `ban`, `whitelist off`) piden confirmación.
 
 ## Dominio
-Revisado el 19 nov 2026: `syntaaxmc.isaacyepez.com` es un CNAME a `molecule-limitation.tun.ply.gg` (el túnel viejo de playit). Java entra por el registro SRV `_minecraft._tcp.syntaaxmc.isaacyepez.com` → `molecule-darkness.tun.ply.gg:44997`. Para la página, el nombre pasa a apuntar a Hostinger y el SRV se queda igual, así que Java sigue entrando con la misma dirección.
+Revisado el 19 nov 2026: `syntaaxmc.isaacyepez.com` es un CNAME a `molecule-limitation.tun.ply.gg` (el túnel viejo de playit). Java entra por el registro SRV `_minecraft._tcp.syntaaxmc.isaacyepez.com` → `molecule-darkness.tun.ply.gg:44997`. Para la página, el nombre pasa a apuntar a Hostinger y el SRV se queda igual, así que Java sigue entrando con la misma dirección. Hecho el 20 nov 2026: el CNAME se borró y Hostinger puso un ALIAS a `syntaaxmc.isaacyepez.com.cdn.hstgr.net`.
 
 ## Fases
 - **P1 (PC):** íconos, bandeja y consola; plugins al día; DriveBackupV2 fuera.
-- **P2 (nube):** página pública con el botón.
+- **P2 (nube):** página pública con el botón. Hecha el 20 nov 2026: https://syntaaxmc.isaacyepez.com.
 - **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 1.21.11 en la nube.
 - **P4:** consola, plugins y editor de configuración en `/admin/`.

@@ -11,19 +11,58 @@ header('X-Content-Type-Options: nosniff');
 const DOMINIO = 'syntaaxmc.isaacyepez.com';
 const RESPALDO = ['molecule-darkness.tun.ply.gg', 44997];  // por si falla la consulta del registro SRV
 const PROTOCOLO = 776;                                      // Java 1.21.11; para el estado sirve cualquiera
-const VIGENCIA = 30;
-const ESPERA = 3.0;
+const VIGENCIA = 30;      // segundos que se guarda una respuesta
+const GRACIA = 180;       // si el túnel corta una consulta suelta, se sigue mostrando «en línea» este tiempo
+const INTENTOS = 2;
+const ESPERA = 2.5;
 
 $cache = sys_get_temp_dir() . '/syntaaxmc-estado.json';
-if (is_file($cache) && time() - (int) filemtime($cache) < VIGENCIA) {
-    readfile($cache);
+$previo = is_file($cache) ? json_decode((string) file_get_contents($cache), true) : null;
+if (is_array($previo) && time() - (int) ($previo['revisado'] ?? 0) < VIGENCIA) {
+    echo json_encode(publico($previo));
     exit;
 }
 
 [$host, $puerto] = destino();
-$json = json_encode(consultar($host, $puerto) + ['revisado' => time()]);
-@file_put_contents($cache, $json, LOCK_EX);
-echo $json;
+$estado = ['en_linea' => false];
+$ips = direcciones($host);
+for ($i = 0; $i < INTENTOS && $ips; $i++) {
+    // Si una conexión falla, se reintenta por la otra versión de IP (IPv4 o IPv6).
+    $estado = consultar($ips[$i % count($ips)], $host, $puerto);
+    if ($estado['en_linea']) {
+        break;
+    }
+    usleep(300000);
+}
+$ahora = time();
+if ($estado['en_linea']) {
+    $estado['visto'] = $ahora;
+} elseif (is_array($previo) && !empty($previo['visto']) && $ahora - (int) $previo['visto'] < GRACIA) {
+    $estado = ['en_linea' => true, 'jugadores' => $previo['jugadores'] ?? 0, 'max' => $previo['max'] ?? 0, 'visto' => $previo['visto']];
+}
+$estado['revisado'] = $ahora;
+@file_put_contents($cache, json_encode($estado), LOCK_EX);
+echo json_encode(publico($estado));
+
+/** Lo que ve la página: sin datos internos. */
+function publico(array $e): array
+{
+    return $e['en_linea'] ?? false
+        ? ['en_linea' => true, 'jugadores' => (int) ($e['jugadores'] ?? 0), 'max' => (int) ($e['max'] ?? 0)]
+        : ['en_linea' => false];
+}
+
+/** Las IP del túnel: primero IPv4 y después IPv6. */
+function direcciones(string $host): array
+{
+    $ips = gethostbynamel($host) ?: [];
+    foreach (@dns_get_record($host, DNS_AAAA) ?: [] as $r) {
+        if (!empty($r['ipv6'])) {
+            $ips[] = '[' . $r['ipv6'] . ']';
+        }
+    }
+    return array_values(array_unique($ips));
+}
 
 /** Dónde está el servidor según el registro SRV que usa Java. */
 function destino(): array
@@ -35,15 +74,19 @@ function destino(): array
     return RESPALDO;
 }
 
-function consultar(string $host, int $puerto): array
+/**
+ * Saluda como lo hace Minecraft Java cuando sigue el registro SRV: con el nombre y el puerto del túnel.
+ * playit mira ese nombre y cierra la conexión si no es el suyo (con syntaaxmc.isaacyepez.com la corta).
+ */
+function consultar(string $ip, string $host, int $puerto): array
 {
-    $f = @fsockopen($host, $puerto, $errno, $error, ESPERA);
+    $f = @fsockopen($ip, $puerto, $errno, $error, ESPERA);
     if (!$f) {
         return ['en_linea' => false];
     }
-    stream_set_timeout($f, (int) ESPERA);
+    stream_set_timeout($f, 3);
     try {
-        $saludo = "\x00" . varint(PROTOCOLO) . varint(strlen(DOMINIO)) . DOMINIO . pack('n', 25565) . varint(1);
+        $saludo = "\x00" . varint(PROTOCOLO) . varint(strlen($host)) . $host . pack('n', $puerto) . varint(1);
         fwrite($f, paquete($saludo) . paquete("\x00"));
         leer_varint($f);                       // largo del paquete
         if (leer_varint($f) !== 0) {           // id del paquete de estado

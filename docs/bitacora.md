@@ -21,3 +21,12 @@
 - Se revisó el dominio: el SRV de Java apunta a `molecule-darkness.tun.ply.gg:44997`, así que el nombre puede pasar a Hostinger sin cortar a Java.
 - Se hicieron los íconos (`recursos/iconos/`).
 - Falta: fase P1 en el PC y P2 a P4 en la nube.
+
+## 20 nov 2026 · Página pública (fase P2)
+- Publicada en https://syntaaxmc.isaacyepez.com (carpeta `public_html/syntaaxmc`). Los archivos están en `sitio/` y se suben con `scripts/subir-sitio.mjs`. Identidad de ¡saax con la letra Montserrat guardada en el propio sitio (sin Google Fonts) y reglas de seguridad (CSP) que solo dejan correr código del sitio.
+- Dominio: se borró el CNAME `syntaaxmc` → `molecule-limitation.tun.ply.gg` (el túnel viejo; Java no lo usaba) y Hostinger puso el ALIAS al crear el subdominio. El SRV de Java quedó igual y sigue funcionando.
+- Error: el subdominio quedó en `public_html/public_html/syntaaxmc`. Causa: el campo `directory` de `hosting_websites_add-domain` es relativo a `public_html` y se le pasó `public_html/syntaaxmc`. Solución: se quitó el subdominio y se volvió a crear con `syntaaxmc`. Quedó la carpeta vacía `public_html/public_html/syntaaxmc`: hay que borrarla desde el Administrador de archivos de Hostinger, porque la API no borra archivos.
+- Error: `estado.php` decía «Apagado» con el servidor prendido. Causa: playit cierra la conexión si el saludo no trae el nombre del túnel, y se mandaba `syntaaxmc.isaacyepez.com:25565`. Java moderno, al seguir el SRV, manda `molecule-darkness.tun.ply.gg:44997`. Solución: saludar con el destino del SRV. Por lo mismo, consultar el túnel por la IP (`147.185.221.217:44997`) da «apagado» aunque funcione: no es una falla del túnel.
+- Hostinger sí sale por puertos poco comunes (probado con portquiz.net en 44997 y 25565).
+- `estado.php` hace 2 intentos (IPv4 e IPv6), guarda la respuesta 30 segundos y sigue mostrando «en línea» 3 minutos si una consulta suelta falla.
+- Falta: probar el botón «Agregar a Minecraft» en un iPhone de verdad, borrar la carpeta vacía y las fases P3 y P4.
