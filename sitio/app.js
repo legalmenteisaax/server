@@ -1,4 +1,4 @@
-// SyntaaxMC: movimiento de ¡saax, botones de copiar, aviso si Minecraft no abre y estado del servidor.
+// SyntaaxMC: movimiento de ¡saax, botones de copiar y estado del servidor.
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
@@ -70,23 +70,6 @@
     s.addRange(r);
   }
 
-  // Si al tocar el botón la página sigue a la vista, Minecraft no se abrió: se muestran los datos a mano.
-  function agregar() {
-    var a = document.getElementById("agregar");
-    var aviso = document.getElementById("no-abrio");
-    if (!a || !aviso) return;
-    a.addEventListener("click", function () {
-      var salio = false;
-      var marcar = function () { salio = true; };
-      document.addEventListener("visibilitychange", marcar, { once: true });
-      window.addEventListener("pagehide", marcar, { once: true });
-      window.addEventListener("blur", marcar, { once: true });
-      setTimeout(function () {
-        if (!salio && document.visibilityState === "visible") aviso.hidden = false;
-      }, 1800);
-    });
-  }
-
   // Estado: en línea con cuántos jugadores, o apagado. Se revisa cada minuto.
   function estado() {
     var el = document.getElementById("estado");
@@ -111,7 +94,7 @@
     setInterval(function () { if (document.visibilityState === "visible") pedir(); }, 60000);
   }
 
-  function iniciar() { movimiento(); copiar(); agregar(); estado(); }
+  function iniciar() { movimiento(); copiar(); estado(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar);
   else iniciar();
 })();

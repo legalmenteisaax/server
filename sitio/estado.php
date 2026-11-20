@@ -7,6 +7,7 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
+header('Access-Control-Allow-Origin: https://isaacyepez.com');  // la tarjeta de SyntaaxMC en isaacyepez.com muestra el estado
 
 const DOMINIO = 'syntaaxmc.isaacyepez.com';
 const RESPALDO = ['molecule-darkness.tun.ply.gg', 44997];  // por si falla la consulta del registro SRV

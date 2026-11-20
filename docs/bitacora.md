@@ -47,3 +47,11 @@
 - Hostinger sí sale por puertos poco comunes (probado con portquiz.net en 44997 y 25565).
 - `estado.php` hace 2 intentos (IPv4 e IPv6), guarda la respuesta 30 segundos y sigue mostrando «en línea» 3 minutos si una consulta suelta falla.
 - Falta: probar el botón «Agregar a Minecraft» en un iPhone de verdad, borrar la carpeta vacía y las fases P3 y P4.
+
+## 20 nov 2026 · Skills, textos y tarjeta en isaacyepez.com
+- Se instalaron `humanizer` y `stop-slop` en `.claude/skills/` (copias de las de `general`). El `.gitignore` las deja entrar.
+- Textos de la página revisados con las dos skills. Isaac vio redundancias: «agregar» salía cuatro veces en la tarjeta del celular, «dirección» cuatro veces en la del PC, la frase de arriba repetía las tarjetas y el pie repetía el estado. Ahora cada tarjeta tiene el nombre de la plataforma (Celular, PC), la dirección y un solo paso a mano. Se quitó el aviso «si no se abrió»: lo cubre ese paso.
+- `estado.php` deja que isaacyepez.com lea el estado (CORS solo para ese origen).
+- isaacyepez.com (repositorio `saax-links`): tarjeta ancha de SyntaaxMC debajo de ¡QRx y Artículos, con el estado en vivo cuando está en línea. Se partió de la versión en vivo, que tenía dos líneas del ícono que no estaban en el repositorio; ya están.
+- El enlace «Administrar» al panel está listo (guardado aparte) y se publica cuando exista `/admin/`.
+- Falta: el panel (P3).
