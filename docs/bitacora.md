@@ -37,7 +37,8 @@
 - Error: LuckPerms no encuentra `.Isaac075095` por nombre (el punto no es válido). Solución: usar el UUID `00000000-0000-0000-0009-01f659d197bf`.
 - Error: el servidor y playit se cerraron a las 17:37 y a las 18:04, seguramente al cerrar sus ventanas; el watchdog los prendió. Ahora corren sin ventana.
 - Ojo: PowerShell 5.1 lee los `.ps1` sin BOM como ANSI. `bandeja.ps1` y `prueba-bandeja.ps1` van en UTF-8 con BOM por las tildes.
-- Falta: Isaac quita el acceso de DriveBackupV2 en su cuenta de Google (las copias de su Drive siguen ahí). Decidir qué hacer con los 5 `.jar` de Fabric/Forge que no cargan. EssentialsX todavía no tiene versión para 26.2. P2 a P4 en la nube.
+- Isaac ya le quitó a DriveBackupV2 el acceso a su cuenta de Google (las copias de su Drive siguen ahí). También borró desde hPanel la carpeta repetida `public_html/public_html/syntaaxmc`.
+- Falta: decidir qué hacer con los 5 `.jar` de Fabric/Forge que no cargan. EssentialsX todavía no tiene versión para 26.2. P2 a P4 en la nube.
 
 ## 20 nov 2026 · Página pública (fase P2)
 - Publicada en https://syntaaxmc.isaacyepez.com (carpeta `public_html/syntaaxmc`). Los archivos están en `sitio/` y se suben con `scripts/subir-sitio.mjs`. Identidad de ¡saax con la letra Montserrat guardada en el propio sitio (sin Google Fonts) y reglas de seguridad (CSP) que solo dejan correr código del sitio.
