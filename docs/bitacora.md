@@ -55,3 +55,16 @@
 - isaacyepez.com (repositorio `saax-links`): tarjeta ancha de SyntaaxMC debajo de ¡QRx y Artículos, con el estado en vivo cuando está en línea. Se partió de la versión en vivo, que tenía dos líneas del ícono que no estaban en el repositorio; ya están.
 - El enlace «Administrar» al panel está listo (guardado aparte) y se publica cuando exista `/admin/`.
 - Falta: el panel (P3).
+
+## 20 nov 2026 · Panel de administración, primera parte (fase P3)
+- En línea en https://syntaaxmc.isaacyepez.com/admin/ y con el enlace «Administrar» en el pie de la página pública.
+- Entrada con passkey (Face ID o Windows Hello), adaptada de ¡platax (`sitio/admin/api/webauthn.php`). Hay un solo dueño: no hay usuarios, solo dispositivos. Sesión de 30 días en la cookie `__Host-syntaax`. Límite: 5 códigos fallidos y 20 entradas fallidas por IP cada 15 minutos.
+- Primer dispositivo: con un código de instalación que la sesión del PC generó y dejó en `C:\Minecraft\server\secretos\codigo-panel.txt`. A la nube solo llegó su SHA-256; el código no pasó por ningún chat. Sirve mientras no haya ninguna passkey. Para otro dispositivo hay que entrar primero con uno registrado.
+- Lo que muestra: estado de ahora, % del tiempo en línea, pico de jugadores, gráfica de 24 horas o 7 días con franja de en línea/apagado, tabla y la lista de dispositivos (quitar y agregar).
+- Base de datos `u810585570_syntaaxmc` (tablas en `admin/api/esquema.sql`, se crean solas). Su clave solo está en `admin/api/config.php` de Hostinger; `config.ejemplo.php` muestra la forma. Si se pierde, se cambia la clave en hPanel y se rehace ese archivo.
+- Tarea programada de Hostinger cada 5 minutos (`admin/api/cron.php`, uid `q2kbWmx0BM`): anota si el servidor respondió y cuántos jugadores había, y borra muestras de más de 90 días.
+- La consulta del estado pasó a `sitio/privado/mc.php` (la web no la sirve), compartida por `estado.php` y el panel.
+- `scripts/subir-sitio.mjs` ya no sube la configuración local de pruebas; la real se sube con `SUBIR_CONFIG=<archivo>`. Reintenta 3 veces si Hostinger corta.
+- Probado aquí con MariaDB y una llave simulada: código malo rechazado, código con guiones y minúsculas aceptado, panel, globo de la gráfica (mouse y dedo), 7 días, salir y entrar, el mismo dispositivo dos veces, y las reglas de acceso (sin sesión, sin origen, `config.php` y `privado/` cerrados). En Hostinger se revisaron las mismas reglas.
+- Error: el código de Isaac salió «no es correcto» la primera vez. Causa: el SHA-256 del PC llegó y se cargó tarde, porque las credenciales de subida (duran unas 6 horas) se vencieron. Solución: credenciales nuevas y se subió `config.php` con el SHA-256.
+- Falta: que Isaac registre su iPhone y, para la siguiente parte, el plugin SyntaaxPanel (lag, memoria, consola, plugins y configuración).

@@ -1,0 +1,6 @@
+# Todo lo que se pida dentro de /admin/api/ lo atiende index.php. Así nadie puede descargar config.php,
+# esquema.sql ni el registro de errores: esas direcciones también caen en index.php, que responde «no existe».
+Options -Indexes
+RewriteEngine On
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^ index.php [L]
