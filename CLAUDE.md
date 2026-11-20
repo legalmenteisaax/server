@@ -3,6 +3,12 @@
 ## Qué es
 El servidor de Minecraft de Isaac, alojado en su PC con Windows (IsaacPC). Antes estaba en Tarohosting; la carpeta de ese servidor está en el PC. Se entra desde el PC (Minecraft Java) y desde el celular (Minecraft Bedrock, el de iPhone y Android).
 
+## Cómo está hoy (20 nov 2026)
+- **Paper 26.2** (build 135) con **Java 25**: se subió de versión al recuperarlo. ViaVersion deja entrar a versiones de Java cercanas.
+- Java entra con `syntaaxmc.isaacyepez.com` (registro SRV → `molecule-darkness.tun.ply.gg:44997`). El celular, con `molecule-hardship.tun.ply.gg`, puerto 19132.
+- Página pública: https://syntaaxmc.isaacyepez.com.
+- En el PC: bandeja con íconos (`scripts/bandeja.ps1`), watchdog (`scripts/watchdog.ps1`) y copias locales en `C:\MinecraftBackups`. Plugins y sus versiones en `docs/plugins.md`.
+
 ## Lo que hay para recuperar (revisado el 16 nov 2026)
 El servidor se llamaba **SyntaaxMC**: **Paper 1.21.11** (lo dice el `level.dat` de la copia del End), que pide Java 21. El plugin **DriveBackupV2** subía copias al Google Drive de Isaac, carpeta `backups` («backups SyntaaxMC»). Queda una copia de cada cosa:
 
@@ -25,13 +31,13 @@ No están en las copias: el `.jar` del servidor (se baja de PaperMC), `server.pr
 - El servidor solo está abierto mientras el PC esté prendido y el programa corriendo.
 
 ## Dónde se trabaja
-Todo lo que toca el servidor se hace en el PC, con Claude Code en la carpeta del servidor: instalar Java, el firewall de Windows, playit y dejarlo corriendo. Una sesión en la nube no ve el PC (las carpetas de Control remoto salen como no disponibles para la nube).
+Todo lo que toca el servidor se hace en el PC, con la sesión «Recuperación del servidor (PC)» de Claude Code en la carpeta del servidor. Una sesión en la nube no ve el PC, pero desde el 19 nov 2026 puede mandarle mensajes a esa sesión (Isaac lo autorizó). La nube hace la página y el panel en Hostinger.
 
 ## Lo que no va a GitHub
 El `.gitignore` deja fuera todo menos lo que nombra: el mundo, la conexión de DriveBackupV2 con Google (está dentro de `plugins/DriveBackupV2/`), los `.jar`, los registros, las listas de jugadores (`ops.json`, `whitelist.json`, `usercache.json`, `banned-*.json`) y las claves: la de Floodgate (`plugins/floodgate/key.pem`), la de playit y `rcon.password` de `server.properties`. Para guardar algo nuevo en Git se agrega una excepción con `!` en el `.gitignore`, revisando antes que no lleve claves.
 
 ## Orden de trabajo
-1. Revisar la carpeta descargada en el PC: la lista de plugins y si hay `server.properties`, con su `online-mode` (`true` = cuentas originales, `false` = no premium). Mantener la versión 1.21.11 mientras se recupera; subir de versión después, con copia.
+1. Revisar la carpeta descargada en el PC: la lista de plugins y si hay `server.properties`, con su `online-mode` (`true` = cuentas originales, `false` = no premium). Mantener la versión 1.21.11 mientras se recupera; subir de versión después, con copia. (Hecho: hoy corre 26.2.)
 2. Copia completa de la carpeta original, sin tocarla.
 3. Java y Paper en la versión que toca.
 4. Geyser y Floodgate. Probar en la casa, desde el PC y el celular.

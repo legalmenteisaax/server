@@ -22,6 +22,23 @@
 - Se hicieron los íconos (`recursos/iconos/`).
 - Falta: fase P1 en el PC y P2 a P4 en la nube.
 
+## 19 nov 2026 · Fase P1 en el PC
+- El servidor corre **Paper 26.2** (build 135) con Java 25, no 1.21.11: se subió de versión durante la recuperación. Las pruebas de P3 deben usar 26.2.
+- Copia antes de empezar en `C:\MinecraftBackups\`: `world-2026-11-19_18-28.zip` (406,8 MB, validada) y `config-pre-panel-2026-11-19_18-30-completo.zip` (plugins y configuración). Los rangos, exportados aparte en `plugins/LuckPerms/pre-panel-2026-11-19.json.gz`.
+- **Bandeja** (`scripts/bandeja.ps1`, con `scripts/comun.ps1`): arranca Java y playit sin ventana y pone dos íconos junto al reloj, servidor y túnel, que pasan a `-ok` o `-error` según el ping cada 20 s. Menú: Abrir consola, Abrir panel (`https://syntaaxmc.isaacyepez.com/admin/`), Reiniciar y Apagar/Encender. La consola lee `logs/latest.log` y manda comandos por RCON; escribir `stop` ahí equivale a Apagar. Si Java o playit se cierran, la bandeja los vuelve a prender (Java, como mucho una vez cada 90 s).
+- `scripts/apagado.flag` manda: mientras exista, nadie prende el servidor. Lo ponen Apagar y el mantenimiento; el panel web puede usar lo mismo.
+- La abre el acceso directo `SyntaaxMC-Bandeja.lnk` de la carpeta Inicio al iniciar sesión, y la tarea `SyntaaxMC-Watchdog` (cada 5 min) si se cerró. Los dos accesos viejos, que abrían las ventanas, quedaron en `C:\MinecraftBackups\inicio-viejo-2026-11-19\`.
+- **Watchdog** (`scripts/watchdog.ps1`): mantiene la PC despierta, reinicia playit si el túnel falla dos veces seguidas y, sin bandeja, prende lo que falte y la abre.
+- Prueba sin ventanas: `scripts/prueba-bandeja.ps1` (pings, RCON, íconos y sintaxis).
+- **Plugins**: 11 actualizados y DriveBackupV2 fuera (detalle en `docs/plugins.md`). Reinicio de 18:59 a 19:01, 125 s caído; arrancó sin errores nuevos.
+- **Dirección**: TAB (animación `web`, que va en el marcador y la lista, y la barra de jefe) y DiscordSRV (estado y `,ip`) dicen `syntaaxmc.isaacyepez.com`. `,ip` da para Bedrock `molecule-hardship.tun.ply.gg`, puerto 19132.
+- **Rango del celular**: `.Isaac075095` quedó en `propietario`. Tiene además un prefijo propio «Bedrock» con el mismo peso (1000) que el de «Propietario».
+- Error: la copia de los plugins salió con 324 archivos menos. Causa: un archivo bloqueado (la base de LuckPerms) dejaba abierta una entrada del zip y fallaban todos los siguientes. Solución: leer cada archivo a memoria antes de crear la entrada; la base de LuckPerms se copia con `lp export`.
+- Error: LuckPerms no encuentra `.Isaac075095` por nombre (el punto no es válido). Solución: usar el UUID `00000000-0000-0000-0009-01f659d197bf`.
+- Error: el servidor y playit se cerraron a las 17:37 y a las 18:04, seguramente al cerrar sus ventanas; el watchdog los prendió. Ahora corren sin ventana.
+- Ojo: PowerShell 5.1 lee los `.ps1` sin BOM como ANSI. `bandeja.ps1` y `prueba-bandeja.ps1` van en UTF-8 con BOM por las tildes.
+- Falta: Isaac quita el acceso de DriveBackupV2 en su cuenta de Google (las copias de su Drive siguen ahí). Decidir qué hacer con los 5 `.jar` de Fabric/Forge que no cargan. EssentialsX todavía no tiene versión para 26.2. P2 a P4 en la nube.
+
 ## 20 nov 2026 · Página pública (fase P2)
 - Publicada en https://syntaaxmc.isaacyepez.com (carpeta `public_html/syntaaxmc`). Los archivos están en `sitio/` y se suben con `scripts/subir-sitio.mjs`. Identidad de ¡saax con la letra Montserrat guardada en el propio sitio (sin Google Fonts) y reglas de seguridad (CSP) que solo dejan correr código del sitio.
 - Dominio: se borró el CNAME `syntaaxmc` → `molecule-limitation.tun.ply.gg` (el túnel viejo; Java no lo usaba) y Hostinger puso el ALIAS al crear el subdominio. El SRV de Java quedó igual y sigue funcionando.

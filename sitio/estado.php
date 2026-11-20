@@ -10,7 +10,7 @@ header('X-Content-Type-Options: nosniff');
 
 const DOMINIO = 'syntaaxmc.isaacyepez.com';
 const RESPALDO = ['molecule-darkness.tun.ply.gg', 44997];  // por si falla la consulta del registro SRV
-const PROTOCOLO = 776;                                      // Java 1.21.11; para el estado sirve cualquiera
+const PROTOCOLO = 776;                                      // Java 26.2; para el estado sirve cualquiera
 const VIGENCIA = 30;      // segundos que se guarda una respuesta
 const GRACIA = 180;       // si el túnel corta una consulta suelta, se sigue mostrando «en línea» este tiempo
 const INTENTOS = 2;

@@ -41,7 +41,7 @@ Tres piezas. El PC nunca queda abierto a internet: solo hace salidas HTTPS a Hos
 Revisado el 19 nov 2026: `syntaaxmc.isaacyepez.com` es un CNAME a `molecule-limitation.tun.ply.gg` (el túnel viejo de playit). Java entra por el registro SRV `_minecraft._tcp.syntaaxmc.isaacyepez.com` → `molecule-darkness.tun.ply.gg:44997`. Para la página, el nombre pasa a apuntar a Hostinger y el SRV se queda igual, así que Java sigue entrando con la misma dirección. Hecho el 20 nov 2026: el CNAME se borró y Hostinger puso un ALIAS a `syntaaxmc.isaacyepez.com.cdn.hstgr.net`.
 
 ## Fases
-- **P1 (PC):** íconos, bandeja y consola; plugins al día; DriveBackupV2 fuera.
+- **P1 (PC):** íconos, bandeja y consola; plugins al día; DriveBackupV2 fuera. Hecha el 19 nov 2026 (ver la bitácora). Para apagar o reiniciar, el plugin puede usar `scripts/apagado.flag`: mientras exista, ni la bandeja ni el watchdog prenden el servidor.
 - **P2 (nube):** página pública con el botón. Hecha el 20 nov 2026: https://syntaaxmc.isaacyepez.com.
-- **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 1.21.11 en la nube.
+- **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 26.2 en la nube (Java 25).
 - **P4:** consola, plugins y editor de configuración en `/admin/`.
