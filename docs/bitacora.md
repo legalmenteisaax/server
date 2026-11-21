@@ -69,3 +69,8 @@
 - Probado aquí con MariaDB y una llave simulada: código malo rechazado, código con guiones y minúsculas aceptado, panel, globo de la gráfica (mouse y dedo), 7 días, salir y entrar, el mismo dispositivo dos veces, y las reglas de acceso (sin sesión, sin origen, `config.php` y `privado/` cerrados). En Hostinger se revisaron las mismas reglas.
 - Error: el código de Isaac salió «no es correcto» la primera vez. Causa: el SHA-256 del PC llegó y se cargó tarde, porque las credenciales de subida (duran unas 6 horas) se vencieron. Solución: credenciales nuevas y se subió `config.php` con el SHA-256.
 - Falta: que Isaac registre su iPhone y, para la siguiente parte, el plugin SyntaaxPanel (lag, memoria, consola, plugins y configuración).
+
+## 21 nov 2026 · Primer dispositivo del panel
+- Isaac no estaba cerca del PC y pidió el código desde el iPhone. Se generó uno nuevo en la nube (12 signos sin 0, O, 1, I ni L), se cambió su SHA-256 en `config.php` de Hostinger y se le pasó por este chat, con su permiso. El de `secretos/codigo-panel.txt` del PC quedó sin valor: falta borrarlo en el PC.
+- Isaac registró su iPhone y entró al panel. Desde ahí, el código de instalación ya no sirve (comprobado: el panel pide entrar primero con un dispositivo registrado).
+- Pendiente: agregar el PC como segundo dispositivo, para no depender solo del iPhone.
