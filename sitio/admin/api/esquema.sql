@@ -43,3 +43,57 @@ CREATE TABLE IF NOT EXISTS muestras (
   jugadores SMALLINT UNSIGNED NULL,
   max SMALLINT UNSIGNED NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+;
+
+-- Desde el 21 nov 2026: el plugin SyntaaxPanel del PC (una sola fila, id = 1). Solo se guarda el SHA-256 de su token
+CREATE TABLE IF NOT EXISTS agente (
+  id TINYINT PRIMARY KEY,
+  token_hash CHAR(64) NOT NULL,
+  conectado DATETIME NOT NULL,
+  ultimo_latido DATETIME NULL,
+  version VARCHAR(20) NULL,
+  estado MEDIUMTEXT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS emparejamientos (
+  codigo_hash CHAR(64) PRIMARY KEY,
+  expira DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Lo que el panel le pide al plugin y lo que el plugin responde
+CREATE TABLE IF NOT EXISTS tareas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  tipo VARCHAR(30) NOT NULL,
+  datos MEDIUMTEXT NOT NULL,
+  estado VARCHAR(10) NOT NULL DEFAULT 'pendiente',
+  creada DATETIME NOT NULL,
+  enviada DATETIME NULL,
+  terminada DATETIME NULL,
+  resultado MEDIUMTEXT NULL,
+  INDEX (estado, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Rendimiento, una fila por minuto
+CREATE TABLE IF NOT EXISTS metricas (
+  momento DATETIME PRIMARY KEY,
+  tps DECIMAL(4,1) NULL,
+  mspt DECIMAL(7,1) NULL,
+  ram_mb INT NULL,
+  ram_max_mb INT NULL,
+  cpu DECIMAL(5,1) NULL,
+  jugadores SMALLINT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Las últimas líneas de la consola (las IP ya llegan tapadas desde el plugin)
+CREATE TABLE IF NOT EXISTS consola (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  momento DATETIME NOT NULL,
+  texto TEXT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Lo que Isaac opina de cada sugerencia del apartado «Sugerencias»
+CREATE TABLE IF NOT EXISTS votos (
+  sugerencia VARCHAR(40) PRIMARY KEY,
+  voto VARCHAR(10) NOT NULL,
+  momento DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

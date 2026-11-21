@@ -74,3 +74,13 @@
 - Isaac no estaba cerca del PC y pidió el código desde el iPhone. Se generó uno nuevo en la nube (12 signos sin 0, O, 1, I ni L), se cambió su SHA-256 en `config.php` de Hostinger y se le pasó por este chat, con su permiso. El de `secretos/codigo-panel.txt` del PC quedó sin valor: falta borrarlo en el PC.
 - Isaac registró su iPhone y entró al panel. Desde ahí, el código de instalación ya no sirve (comprobado: el panel pide entrar primero con un dispositivo registrado).
 - Pendiente: agregar el PC como segundo dispositivo, para no depender solo del iPhone.
+
+## 21 nov 2026 · El panel completo y el plugin SyntaaxPanel (fases P3 y P4)
+- Isaac agregó el PC como segundo dispositivo y borró el código viejo del PC.
+- Pidió todo el panel: menú desplegable, jugadores con botones (operador, rangos, expulsar, banear, lista blanca), rangos de LuckPerms, consola, rendimiento, plugins, archivos con editor y un apartado de sugerencias. Diseño en `docs/plan/panel.md` (P3b y P4).
+- Plugin `plugin/` (Java 25, Paper 26.2 build 135, LuckPerms 5.5): latido cada 15 s o 1,5 s con el panel abierto; tareas por tipo con validación; archivos solo dentro de la carpeta del servidor, sin llaves ni playit ni `secretos/`, con campos secretos tapados y conservados al guardar, copia previa en `plugins/SyntaaxPanel/copias/`, revisión de YAML/JSON y del hash para no pisar cambios.
+- Hostinger: `admin/api/agente.php` (emparejar, latido, resultado, cola de tareas, métricas por minuto, consola, sugerencias y descarga del `.jar` con sesión). Las tablas nuevas se crearon solas en la base real.
+- Probado aquí con un servidor Paper 26.2 build 135 de verdad, LuckPerms 5.5.71, MariaDB y el panel en un iPhone y un PC simulados: conexión con código (el falso se rechaza), jugadores de Java y de Bedrock, operador, rango por UUID, baneo, permisos, prefijos con colores, consola en vivo con comandos, rendimiento con 4 gráficas, plugins, edición de `server.properties` con la contraseña tapada y conservada, YAML roto rechazado, hash viejo rechazado, `secretos/`, `playit/` y `../` bloqueados. Sin errores en la página.
+- Errores encontrados y corregidos en las pruebas: el aviso de guardado fallaba por una ruta relativa de la copia (`'other' is different type of Path`); un error salía con el nombre de la excepción de Java; las carpetas protegidas se podían listar; la respuesta de `panel conectar` no se veía por RCON (ahora también va al registro).
+- En vivo se revisaron las reglas: sin sesión no hay datos ni tareas ni descarga; latido sin token y código falso rechazados; el `.jar` no se descarga directo.
+- Falta: instalar el plugin en el PC y conectarlo (pasos en la sección «Conexión» del panel).

@@ -1,5 +1,6 @@
 <?php
-// Las direcciones de la API del panel. Acceso: «publico» (sin sesión) o «sesion» (entraste con tu passkey).
+// Las direcciones de la API del panel. Acceso: «publico» (sin sesión), «sesion» (entraste con tu passkey)
+// o «abierto» (el plugin del PC, que no manda origen; se identifica con su token).
 declare(strict_types=1);
 
 function rutas(): array
@@ -20,6 +21,19 @@ function rutas(): array
         ['GET', 'resumen', 'sesion', 'resumen'],
         ['GET', 'dispositivos', 'sesion', 'dispositivos'],
         ['DELETE', 'dispositivos/{id}', 'sesion', 'borrar_dispositivo'],
+        // Plugin SyntaaxPanel (agente.php): «abierto» = sin sesión ni origen; el latido y el resultado exigen su token.
+        ['POST', 'agente/emparejar', 'abierto', 'emparejar'],
+        ['POST', 'agente/latido', 'abierto', 'latido'],
+        ['POST', 'agente/resultado', 'abierto', 'resultado_tarea'],
+        ['POST', 'conexion/codigo', 'sesion', 'codigo_conexion'],
+        ['GET', 'servidor', 'sesion', 'servidor'],
+        ['POST', 'tareas', 'sesion', 'nueva_tarea'],
+        ['GET', 'tareas/{id}', 'sesion', 'ver_tarea'],
+        ['GET', 'metricas', 'sesion', 'metricas'],
+        ['GET', 'consola', 'sesion', 'consola'],
+        ['GET', 'descargar/plugin', 'sesion', 'descargar_plugin'],
+        ['GET', 'sugerencias', 'sesion', 'sugerencias'],
+        ['POST', 'sugerencias/voto', 'sesion', 'votar'],
     ];
 }
 

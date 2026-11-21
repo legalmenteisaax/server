@@ -15,9 +15,14 @@
 !recursos/**
 !sitio/
 !sitio/**
+!plugin/
+!plugin/**
 # Archivos que los scripts cambian solos al correr
 scripts/*.state
 scripts/*.flag
 # Claves del panel y su registro de errores: solo viven en Hostinger
 sitio/admin/api/config.php
 sitio/admin/api/registro/
+# Lo que compila Maven no va a Git
+plugin/target/
+sitio/admin/api/archivos/

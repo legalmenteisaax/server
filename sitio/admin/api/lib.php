@@ -31,10 +31,11 @@ function db(): PDO
     return $pdo;
 }
 
-/** La primera vez crea las tablas de esquema.sql. */
+/** Crea las tablas de esquema.sql que falten. */
 function asegurar_esquema(PDO $pdo): void
 {
-    if ($pdo->query("SHOW TABLES LIKE 'muestras'")->fetchColumn()) {
+    // Se revisa la última tabla agregada: si falta, se corre esquema.sql completo (todo es CREATE TABLE IF NOT EXISTS).
+    if ($pdo->query("SHOW TABLES LIKE 'votos'")->fetchColumn()) {
         return;
     }
     $sql = preg_replace('/^--.*$/m', '', (string) file_get_contents(__DIR__ . '/esquema.sql'));

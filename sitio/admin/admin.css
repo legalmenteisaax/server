@@ -121,3 +121,102 @@ details.tabla td:not(:first-child),details.tabla th:not(:first-child){text-align
 .pronto li+li{margin-top:4px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- menú desplegable de secciones ---------- */
+.barra{position:relative;z-index:20}
+.menu-boton{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 14px 0 16px;border-radius:14px;border:1px solid var(--line-hi);
+  background:var(--negro);color:var(--text);font-weight:800;font-size:15px;cursor:pointer}
+.menu-boton svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.menu-boton[aria-expanded="true"] svg{transform:rotate(180deg)}
+.menu{position:absolute;right:4px;top:calc(100% + 4px);width:min(300px,calc(100vw - 40px));padding:8px;border-radius:18px;background:var(--negro-2);
+  border:1px solid var(--line-hi);box-shadow:0 24px 50px -20px rgba(0,0,0,.9)}
+.menu a{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;padding:0 12px;border-radius:12px;color:var(--text);
+  text-decoration:none;font-weight:700;font-size:15px}
+.menu a:hover{background:var(--negro-3)}
+.menu a[aria-current="page"]{background:rgba(255,90,31,.14);color:var(--naranja)}
+.menu a small{font-size:11px;font-weight:700;color:var(--muted)}
+.menu hr{border:0;border-top:1px solid var(--line);margin:6px 4px}
+.seccion{display:contents}
+.aviso-servidor{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+
+/* ---------- listas interactivas (jugadores, rangos, archivos, plugins) ---------- */
+.buscar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.buscar input{flex:1 1 200px;min-height:46px;padding:10px 14px;border-radius:14px;border:1px solid var(--line-hi);background:var(--negro-2);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips button{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line-hi);background:transparent;color:var(--muted);font-weight:700;font-size:12.5px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--text);color:var(--ink);border-color:var(--text)}
+.filas{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.fila{border-radius:16px;background:var(--negro-2);border:1px solid var(--line)}
+.fila>button.cabeza{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:10px 12px;border:0;background:transparent;text-align:left;cursor:pointer}
+.fila>button.cabeza:hover{background:rgba(255,255,255,.02)}
+.inicial{flex:none;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--negro-3);font-weight:800;color:var(--niebla)}
+.fila .que{flex:1;min-width:0}
+.fila .que b{display:block;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fila .que small{display:block;font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.marcas{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.m{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--negro-3);color:var(--niebla)}
+.m.on{background:rgba(52,199,89,.16);color:var(--verde)}
+.m.op{background:rgba(255,90,31,.16);color:var(--naranja)}
+.m.ban{background:rgba(255,69,58,.16);color:#ff8a82}
+.detalle{padding:4px 12px 14px;display:grid;gap:12px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px}
+.linea{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.linea select,.linea input{flex:1 1 160px;min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid var(--line-hi);background:var(--negro);color:var(--text);font-size:15px}
+.etiqueta{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mensaje{font-size:13px;font-weight:600;color:var(--muted)}
+.mensaje.bien{color:var(--verde)}
+.mensaje.mal{color:#ff8a82}
+.permisos{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.permisos li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 10px;border-radius:10px;background:var(--negro);font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.permisos li span{min-width:0;overflow-wrap:anywhere}
+.permisos .no{color:#ff8a82;text-decoration:line-through}
+.mini{min-height:34px;min-width:34px;padding:0 10px;border-radius:10px;border:1px solid var(--line-hi);background:transparent;color:var(--text);font-weight:700;font-size:12.5px;cursor:pointer}
+.mini:hover{border-color:var(--text)}
+.prefijo{font-family:ui-monospace,Consolas,monospace;font-weight:700}
+.c0{color:#000}.c1{color:#00a}.c2{color:#0a0}.c3{color:#0aa}.c4{color:#a00}.c5{color:#a0a}.c6{color:#fa0}.c7{color:#aaa}
+.c8{color:#555}.c9{color:#55f}.ca{color:#5f5}.cb{color:#5ff}.cc{color:#f55}.cd{color:#f5f}.ce{color:#ff5}.cf{color:#fff}
+
+/* ---------- consola ---------- */
+.terminal{height:min(60vh,520px);overflow:auto;padding:12px;border-radius:14px;background:#050607;border:1px solid var(--line);
+  font-family:ui-monospace,Consolas,"Cascadia Mono",monospace;font-size:12px;line-height:1.55;color:#cfd3d8;white-space:pre-wrap;overflow-wrap:anywhere}
+.terminal .warn{color:#ffcc66}
+.terminal .error{color:#ff8a82;background:none;padding:0;margin:0;border-radius:0;font-weight:400;font-size:inherit}
+.enviar{display:flex;gap:8px;margin-top:10px}
+.enviar input{flex:1;min-width:0;min-height:48px;padding:10px 14px;border-radius:14px;border:1px solid var(--line-hi);background:var(--negro-2);
+  font-family:ui-monospace,Consolas,monospace;font-size:16px}
+
+/* ---------- rendimiento ---------- */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:900px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.barrita{height:6px;margin-top:8px;border-radius:3px;background:var(--negro-3);overflow:hidden}
+.barrita i{display:block;height:100%;border-radius:3px;background:var(--naranja)}
+.cifra .bien{color:var(--verde)}.cifra .medio{color:#ffcc66}.cifra .mal{color:#ff8a82}
+.graficas{display:grid;gap:12px}
+@media (min-width:900px){.graficas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.graficas h3{margin:0;font-size:13px;font-weight:800}
+table.simple{width:100%;border-collapse:collapse;font-size:13px}
+table.simple th,table.simple td{padding:7px 4px;text-align:left;border-bottom:1px solid var(--line)}
+table.simple th{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+table.simple td:not(:first-child),table.simple th:not(:first-child){text-align:right}
+
+/* ---------- archivos ---------- */
+.ruta{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin-bottom:12px;font-size:13.5px;font-weight:700}
+.ruta button{border:0;background:transparent;color:var(--naranja);font-weight:700;cursor:pointer;padding:6px 4px}
+.ruta span{color:var(--muted)}
+.icono-arch{flex:none;width:22px;height:22px;fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.carpeta .icono-arch{stroke:var(--naranja)}
+.editor{width:100%;min-height:58vh;padding:12px;border-radius:14px;border:1px solid var(--line-hi);background:#050607;color:#e6e8eb;
+  font-family:ui-monospace,Consolas,monospace;font-size:13px;line-height:1.5;tab-size:2;resize:vertical;white-space:pre;overflow:auto}
+.vista-img{max-width:100%;border-radius:12px;background:repeating-conic-gradient(#222 0 25%,#2b2b2b 0 50%) 0 0/16px 16px;image-rendering:pixelated}
+
+/* ---------- sugerencias ---------- */
+.sugerencia{display:grid;gap:10px;padding:16px;border-radius:16px;background:var(--negro-2);border:1px solid var(--line)}
+.sugerencia h3{margin:0;font-size:16px;font-weight:800}
+.sugerencia p{color:var(--muted);font-weight:500;font-size:14px}
+.voto[aria-pressed="true"]{background:var(--text);color:var(--ink);border-color:var(--text)}
+.codigo-grande{font-family:ui-monospace,Consolas,monospace;font-size:30px;font-weight:800;letter-spacing:.08em;color:var(--naranja)}
+.pasos-lista{margin:0;padding-left:20px;display:grid;gap:10px;font-weight:600}
+.pasos-lista code{font-family:ui-monospace,Consolas,monospace;background:var(--negro-2);padding:2px 6px;border-radius:6px}
+form[data-campo]{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 8px;align-items:center}
+form[data-campo] .etiqueta,form[data-campo] .prefijo{grid-column:1 / -1}
+form[data-campo] input{min-width:0}

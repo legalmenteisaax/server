@@ -6,6 +6,7 @@ ini_set('display_errors', '0');
 require __DIR__ . '/lib.php';
 require __DIR__ . '/webauthn.php';
 require __DIR__ . '/rutas.php';
+require __DIR__ . '/agente.php';
 require __DIR__ . '/../../privado/mc.php';
 
 header('Cache-Control: no-store');
@@ -18,11 +19,17 @@ try {
         if ($m !== $metodo || !preg_match('#^' . str_replace('{id}', '(\d+)', $patron) . '$#', $ruta, $p)) {
             continue;
         }
-        if ($metodo !== 'GET') {
+        if ($metodo !== 'GET' && $acceso !== 'abierto') {
             exigir_mismo_origen();
         }
-        if ($acceso === 'sesion' && sesion_passkey() === null) {
-            throw new ErrorApi('Tu sesión terminó. Entra de nuevo.', 401);
+        if ($acceso === 'sesion') {
+            if (sesion_passkey() === null) {
+                throw new ErrorApi('Tu sesión terminó. Entra de nuevo.', 401);
+            }
+            // Con el panel abierto, el plugin pregunta cada 1,5 segundos en vez de cada 15 (agente.php).
+            if (time() - (int) (ajuste('panel_visto') ?? 0) > 10) {
+                guardar_ajuste('panel_visto', (string) time());
+            }
         }
         responder($fn(...array_map('intval', array_slice($p, 1))));
     }

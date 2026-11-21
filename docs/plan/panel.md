@@ -45,3 +45,14 @@ Revisado el 19 nov 2026: `syntaaxmc.isaacyepez.com` es un CNAME a `molecule-limi
 - **P2 (nube):** página pública con el botón. Hecha el 20 nov 2026: https://syntaaxmc.isaacyepez.com.
 - **P3 (nube, luego PC):** plugin SyntaaxPanel con estado y gráficas en `/admin/`. Se prueba primero con un Paper 26.2 en la nube (Java 25). Primera parte hecha el 20 nov 2026: entrada con Face ID, estado, gráfica de jugadores (muestras cada 5 minutos desde Hostinger) y dispositivos. Falta el plugin SyntaaxPanel.
 - **P4:** consola, plugins y editor de configuración en `/admin/`.
+
+## P3b y P4: el panel completo (pedido el 21 nov 2026)
+Isaac pidió: menú desplegable para elegir la sección; lista interactiva de jugadores que han entrado, con botones para operador, rangos de LuckPerms, expulsar, banear y lista blanca (todo queda guardado y aplica cuando vuelvan a entrar); configurar los rangos; consola, rendimiento y plugins; un apartado de archivos para ver y editar cualquier archivo; y un apartado de sugerencias.
+
+### Cómo funciona
+- **Plugin SyntaaxPanel** (Java, en `plugin/`): cada 15 segundos, o cada 1,5 segundos con el panel abierto, le manda a Hostinger un latido con las métricas (TPS, MSPT, memoria, CPU, jugadores conectados) y las líneas nuevas de la consola, y recibe las tareas pendientes. Las cumple y devuelve el resultado. El PC solo hace salidas HTTPS.
+- **Conexión**: el panel muestra un código de 10 minutos y en la consola del servidor se escribe `panel conectar CÓDIGO`. El plugin crea su token al azar; Hostinger guarda solo su SHA-256.
+- **Jugadores y rangos**: los datos salen de Paper (jugadores que han entrado) y de LuckPerms. Operador, baneo y lista blanca se cambian con la API de Paper (por UUID, sirve con los de Bedrock que empiezan con punto). Los rangos, con comandos `lp` por UUID. Todo queda guardado en el servidor y aplica al volver a entrar.
+- **Archivos**: solo dentro de la carpeta del servidor. No se leen claves (`*.pem`, `*.key`, la carpeta de playit, `secretos/`, la configuración del propio plugin). En YAML, properties, JSON y TOML, los valores de campos con password, secret, token o key salen como «••••••» y se conservan al guardar. Antes de guardar se hace una copia en `plugins/SyntaaxPanel/copias/`, se revisa que el YAML o JSON siga válido y que el archivo no haya cambiado desde que se abrió. Texto hasta 1 MB, imágenes hasta 2 MB.
+- **Consola**: las IP de los jugadores salen tapadas (Ley 1581).
+- **Reiniciar** es `stop`: la bandeja lo vuelve a prender en unos 5 segundos. **Apagar** crea `scripts/apagado.flag` antes de `stop`.

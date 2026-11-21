@@ -1,0 +1,15 @@
+name: SyntaaxPanel
+version: '${project.version}'
+main: com.isaacyepez.syntaaxpanel.SyntaaxPanel
+api-version: '26.2'
+description: Conecta el servidor con el panel de syntaaxmc.isaacyepez.com
+author: ¡saax
+softdepend: [LuckPerms, floodgate]
+commands:
+  panel:
+    description: Conexión con el panel web
+    usage: /panel <conectar CÓDIGO|estado>
+    permission: syntaaxpanel.admin
+permissions:
+  syntaaxpanel.admin:
+    default: op

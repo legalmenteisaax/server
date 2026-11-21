@@ -1,0 +1,4 @@
+# SyntaaxPanel · conexión con el panel web.
+# El token se crea solo la primera vez y es secreto: no lo compartas ni lo subas a GitHub.
+url: https://syntaaxmc.isaacyepez.com/admin/api/
+token: ''
