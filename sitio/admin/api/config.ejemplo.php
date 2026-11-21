@@ -7,4 +7,6 @@ return [
     'db' => ['host' => '127.0.0.1', 'nombre' => 'u810585570_syntaaxmc', 'usuario' => 'u810585570_syntaaxmc', 'clave' => '...'],
     // SHA-256 del código de instalación (en mayúsculas, sin guiones). Solo sirve mientras no haya ninguna passkey.
     'codigo_instalacion_sha256' => '...',
+    // SHA-256 del token del plugin SyntaaxPanel para la primera conexión (lo genera el PC). Vale mientras no haya uno conectado.
+    'agente_token_sha256' => '',
 ];

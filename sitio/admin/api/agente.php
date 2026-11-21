@@ -9,12 +9,32 @@ const SIN_LATIDO = 45;      // segundos sin latido para dar el plugin por descon
 
 // ---------- del lado del plugin ----------
 
-/** El plugin manda su token en X-Syntaax-Token; aquí solo está su SHA-256. */
-function exigir_agente(): void
+/**
+ * El plugin manda su token en X-Syntaax-Token; aquí solo está su SHA-256. La primera vez también vale el SHA-256
+ * que esté en config.php («agente_token_sha256»): así el PC instala el plugin sin pasar el token por ningún chat.
+ */
+function token_agente_valido(): bool
 {
     $token = (string) ($_SERVER['HTTP_X_SYNTAAX_TOKEN'] ?? '');
+    if (strlen($token) < 32) {
+        return false;
+    }
+    $h = hash('sha256', $token);
     $guardado = q('SELECT token_hash FROM agente WHERE id = 1')->fetchColumn();
-    if ($token === '' || $guardado === false || !hash_equals((string) $guardado, hash('sha256', $token))) {
+    if ($guardado === false) {
+        $inicial = (string) (config()['agente_token_sha256'] ?? '');
+        if ($inicial === '' || !hash_equals($inicial, $h)) {
+            return false;
+        }
+        q('INSERT INTO agente (id, token_hash, conectado) VALUES (1, ?, UTC_TIMESTAMP())', [$h]);
+        return true;
+    }
+    return hash_equals((string) $guardado, $h);
+}
+
+function exigir_agente(): void
+{
+    if (!token_agente_valido()) {
         limitar('agente', 30);
         registrar_fallo('agente');
         throw new ErrorApi('El plugin no está conectado a este panel. Escribe «panel conectar CÓDIGO» en la consola.', 401);
@@ -173,9 +193,12 @@ function consola(): array
     return array_map(fn($f) => ['id' => (int) $f['id'], 't' => (int) $f['t'], 'texto' => $f['texto']], $filas);
 }
 
-/** El plugin para instalar en el PC. Solo con sesión. */
+/** El plugin para instalar en el PC: con sesión del panel o con el token del plugin. */
 function descargar_plugin(): never
 {
+    if (sesion_passkey() === null) {
+        exigir_agente();
+    }
     $jar = __DIR__ . '/archivos/SyntaaxPanel.jar';
     if (!is_file($jar)) {
         throw new ErrorApi('El archivo del plugin todavía no está en el servidor.', 404);

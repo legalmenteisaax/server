@@ -31,7 +31,7 @@ function rutas(): array
         ['GET', 'tareas/{id}', 'sesion', 'ver_tarea'],
         ['GET', 'metricas', 'sesion', 'metricas'],
         ['GET', 'consola', 'sesion', 'consola'],
-        ['GET', 'descargar/plugin', 'sesion', 'descargar_plugin'],
+        ['GET', 'descargar/plugin', 'abierto', 'descargar_plugin'],
         ['GET', 'sugerencias', 'sesion', 'sugerencias'],
         ['POST', 'sugerencias/voto', 'sesion', 'votar'],
     ];

@@ -84,3 +84,9 @@
 - Errores encontrados y corregidos en las pruebas: el aviso de guardado fallaba por una ruta relativa de la copia (`'other' is different type of Path`); un error salía con el nombre de la excepción de Java; las carpetas protegidas se podían listar; la respuesta de `panel conectar` no se veía por RCON (ahora también va al registro).
 - En vivo se revisaron las reglas: sin sesión no hay datos ni tareas ni descarga; latido sin token y código falso rechazados; el `.jar` no se descarga directo.
 - Falta: instalar el plugin en el PC y conectarlo (pasos en la sección «Conexión» del panel).
+
+## 21 nov 2026 · Instalar el plugin desde la nube
+- Isaac pidió que la instalación del plugin la hiciera Claude. La sesión del PC estaba archivada, así que se abrió una nueva en el acceso de Control remoto de `C:\Minecraft\server` («Instalar SyntaaxPanel (PC)»).
+- Para que ningún secreto pase por un chat: el PC crea el token del plugin y manda solo su SHA-256. Ese SHA-256 va en `config.php` como `agente_token_sha256` y vale solo mientras no haya un plugin conectado. Con ese token, el PC también puede bajar el `.jar` (`descargar/plugin` acepta sesión del panel o token del plugin).
+- Probado aquí: token malo rechazado, token bueno baja el mismo `.jar` y conecta, y después ningún otro token sirve. SHA-256 del `.jar` 1.0.0: f325140ee7285ff235497caaf071181972d3a2738b5c8e6724d8debda4c868a4.
+- Falta: que la sesión del PC mande el SHA-256, cargarlo y comprobar la conexión.
